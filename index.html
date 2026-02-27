@@ -3,31 +3,63 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>YouTube 3x Player</title>
+    <title>YouTube Speed Player</title>
 
     <style>
         body {
-            font-family: Arial;
-            text-align: center;
-            background: #111;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0f0f0f;
             color: white;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Page container */
+        .container {
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* Top controls */
+        .controls {
+            margin-top: 20px;
         }
 
         input {
-            width: 420px;
-            padding: 10px;
+            width: 70%;
+            max-width: 500px;
+            padding: 12px;
             font-size: 16px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
         }
 
         button {
-            padding: 10px 18px;
-            font-size: 16px;
-            margin: 5px;
+            padding: 12px 18px;
+            font-size: 15px;
+            margin: 6px;
+            border: none;
+            border-radius: 8px;
             cursor: pointer;
         }
 
-        #player {
-            margin-top: 20px;
+        /* Player wrapper centers video */
+        .player-wrapper {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Speed buttons */
+        .speed-buttons {
+            margin-top: 15px;
         }
     </style>
 
@@ -35,21 +67,28 @@
 
 <body>
 
-    <h2>⚡ YouTube Speed Player</h2>
-    <p>Start at 3x. Go even faster.</p>
+    <div class="container">
 
-    <!-- <input id="url" placeholder="Paste YouTube link here"> -->
-    <input id="url" autofocus placeholder="Paste YouTube link and press Enter.">
-    <button onclick="loadVideo()">Play</button>
+        <h2>⚡ YouTube Speed Player</h2>
+        <p>Start at 3x. Go even faster.</p>
 
-    <div id="player"></div>
+        <div class="controls">
+            <input id="url" autofocus placeholder="Paste YouTube link and press Enter">
+            <button onclick="loadVideo()">Play</button>
+        </div>
 
-    <br>
+        <div class="player-wrapper">
+            <div id="player"></div>
+        </div>
 
-    <button onclick="setSpeed(1)">1x</button>
-    <button onclick="setSpeed(2)">2x</button>
-    <button onclick="setSpeed(3)">3x</button>
-    <button onclick="setSpeed(4)">4x</button>
+        <div class="speed-buttons">
+            <button onclick="setSpeed(1)">1x</button>
+            <button onclick="setSpeed(2)">2x</button>
+            <button onclick="setSpeed(3)">3x</button>
+            <button onclick="setSpeed(4)">4x</button>
+        </div>
+
+    </div>
 
     <script src="https://www.youtube.com/iframe_api"></script>
 
