@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>YouTube Speed Player</title>
+</head>
+
+<body>
+
+    <h2>YouTube 3x / 4x Speed Player</h2>
+
+    <input id="videoId" placeholder="Enter YouTube Video ID">
+    <button onclick="loadVideo()">Load</button>
+
+    <br><br>
+
+    <div id="player"></div>
+
+    <br>
+
+    <button onclick="setSpeed(1)">1x</button>
+    <button onclick="setSpeed(2)">2x</button>
+    <button onclick="setSpeed(3)">3x</button>
+    <button onclick="setSpeed(4)">4x</button>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script>
+        let player;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '480',
+                width: '800',
+                videoId: ''
+            });
+        }
+
+        function loadVideo() {
+            const id = document.getElementById("videoId").value;
+            player.loadVideoById(id);
+        }
+
+        function setSpeed(rate) {
+            player.setPlaybackRate(rate);
+        }
+    </script>
+
+</body>
+
+</html>
