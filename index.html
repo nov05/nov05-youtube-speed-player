@@ -3,17 +3,43 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>YouTube Speed Player</title>
+    <title>YouTube 3x Player</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #111;
+            color: white;
+        }
+
+        input {
+            width: 420px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 18px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        #player {
+            margin-top: 20px;
+        }
+    </style>
+
 </head>
 
 <body>
 
-    <h2>YouTube 3x / 4x Speed Player</h2>
+    <h2>⚡ YouTube Speed Player</h2>
+    <p>Start at 3x. Go even faster.</p>
 
-    <input id="videoId" placeholder="Enter YouTube Video ID">
-    <button onclick="loadVideo()">Load</button>
-
-    <br><br>
+    <input id="url" placeholder="Paste YouTube link here">
+    <button onclick="loadVideo()">Play</button>
 
     <div id="player"></div>
 
@@ -27,8 +53,10 @@
     <script src="https://www.youtube.com/iframe_api"></script>
 
     <script>
+
         let player;
 
+        // YouTube API Ready
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
                 height: '480',
@@ -37,14 +65,39 @@
             });
         }
 
-        function loadVideo() {
-            const id = document.getElementById("videoId").value;
-            player.loadVideoById(id);
+        // Retreive video ID
+        function extractVideoID(url) {
+            let regExp =
+                /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            let match = url.match(regExp);
+            return (match && match[2].length == 11)
+                ? match[2]
+                : null;
         }
 
+        // Load video
+        function loadVideo() {
+            const url = document.getElementById("url").value;
+            const id = extractVideoID(url);
+
+            if (!id) {
+                alert("Invalid YouTube URL");
+                return;
+            }
+
+            player.loadVideoById(id);
+
+            // Default 3x speed
+            setTimeout(() => {
+                player.setPlaybackRate(3);
+            }, 1500);
+        }
+
+        // Set speed
         function setSpeed(rate) {
             player.setPlaybackRate(rate);
         }
+
     </script>
 
 </body>
