@@ -86,6 +86,8 @@
             <button onclick="setSpeed(2)">2x</button>
             <button onclick="setSpeed(3)">3x</button>
             <button onclick="setSpeed(4)">4x</button>
+            <button onclick="setSpeed(4)">5x</button>
+            <button onclick="setSpeed(4)">6x</button>
         </div>
 
     </div>
@@ -152,11 +154,12 @@
         // Set speed
         function setSpeed(rate) {
             player.setPlaybackRate(rate);
-            
+
             // bypass 2x limit
             setTimeout(() => {
+                // After 100 millisecond, it calls the forceSpeed function
                 forceSpeed(rate);
-            }, 1000);
+            }, 100);
         }
 
     </script>
