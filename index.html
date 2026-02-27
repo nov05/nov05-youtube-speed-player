@@ -133,9 +133,30 @@
             }, 1500);
         }
 
+        // Force speed
+        function forceSpeed(rate) {
+            const iframe =
+                document.querySelector('#player iframe');
+
+            if (!iframe) return;
+
+            const video =
+                iframe.contentWindow.document
+                    .querySelector('video');
+
+            if (video) {
+                video.playbackRate = rate;
+            }
+        }
+
         // Set speed
         function setSpeed(rate) {
             player.setPlaybackRate(rate);
+            
+            // bypass 2x limit
+            setTimeout(() => {
+                forceSpeed(rate);
+            }, 1000);
         }
 
     </script>
